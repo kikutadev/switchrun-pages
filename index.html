@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no" />
   <meta name="theme-color" content="#070f1a" />
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-  <meta name="description" content="タップで進路を切り替える、75秒のリアルタイム仕分けアクション。光る荷物を同じ色の出口へ。" />
-  <title>SWITCHRUN — 3つの分岐、75秒の勝負</title>
-  <script type="module" crossorigin src="./assets/index-P5hrOR7-.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BwXF7znY.css">
+  <meta name="description" content="嵐で孤立した街に医薬品・食料・発電用燃料を届ける救援仕分けアクション。進路を切り替えて3つの施設へ。" />
+  <title>SWITCHRUN — 嵐の街への救援輸送</title>
+  <script type="module" crossorigin src="./assets/index-CCptiwG4.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BQXYfVCD.css">
 </head>
 <body>
   <div class="app">
@@ -17,7 +17,7 @@
         <div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div>
         <div>
           <div class="brand-name">SWITCH<span>RUN</span><sup>03</sup></div>
-          <div class="brand-caption">REAL-TIME ROUTING ARCADE</div>
+          <div class="brand-caption">STORM RELIEF / 救援輸送管制</div>
         </div>
       </div>
       <div class="head-controls">
@@ -28,59 +28,63 @@
 
     <section class="scoreboard" aria-label="プレイ状況">
       <div class="stat">
-        <span class="stat-label">DELIVERED <small>配達</small></span>
+        <span class="stat-label">DELIVERED <small>救援済み</small></span>
         <strong class="stat-main" id="delivered">00</strong>
       </div>
       <div class="stat stat-time">
-        <span class="stat-label" id="time-label">TIME LEFT 残り時間</span>
+        <span class="stat-label" id="time-label">TIME LEFT 最終便まで</span>
         <div class="time-fig"><strong id="time-left">75</strong><span>SEC</span></div>
       </div>
       <div class="stat stat-health">
-        <span class="stat-label">SYSTEM <small>設備耐久</small></span>
-        <div class="health-meter" id="health-meter" aria-label="設備耐久4"><i></i><i></i><i></i><i></i></div>
+        <span class="stat-label">ERROR LIMIT <small>許容誤配 残り</small></span>
+        <div class="health-meter" id="health-meter" aria-label="許容誤配残り4"><i></i><i></i><i></i><i></i></div>
       </div>
     </section>
 
-    <section class="playfield" aria-label="仕分け線路">
+    <section class="playfield" aria-label="救援物資の搬送線路">
       <div class="field-bar">
         <div class="bar-left"><span class="live-dot"></span><span id="wave-label">01/03 · WAVE 01</span><span class="speed-indicator" id="speed-indicator" aria-label="荷物の速度倍率">×1.0</span></div>
         <div class="bar-right"><span class="field-score-label">SCORE</span><strong id="score">000000</strong></div>
       </div>
 
+      <div class="cargo-legend" aria-label="物資の種類と配送先">
+        <div class="legend-pair med"><span class="cargo-symbol">薬</span><span class="legend-item">医薬品</span><span class="legend-arrow">→</span><strong>病院</strong></div>
+        <div class="legend-pair food"><span class="cargo-symbol">食</span><span class="legend-item">食料</span><span class="legend-arrow">→</span><strong>避難所</strong></div>
+        <div class="legend-pair power"><span class="cargo-symbol">燃</span><span class="legend-item">燃料</span><span class="legend-arrow">→</span><strong>発電所</strong></div>
+      </div>
       <div class="canvas-wrap">
-        <canvas id="game-canvas" aria-label="エネルギー荷物が3本の線路を進みます。光る分岐器をタップして進路を切り替えてください。" role="img"></canvas>
+        <canvas id="game-canvas" aria-label="医薬品は病院、食料は避難所、燃料は発電所へ。3つの分岐器をタップして救援物資を届けてください。" role="img"></canvas>
         <div id="float-message" class="float-message" aria-live="polite"></div>
 
         <div class="cover" id="cover">
           <div class="cover-inner" id="cover-inner">
-            <span class="cover-eyebrow">01 / NO TUTORIAL REQUIRED</span>
-            <h1>流れを、<br /><em>切り替えろ。</em></h1>
-            <p>光る分岐をタップして、<br />荷物を同じ色の出口へ。</p>
-            <button class="main-button" id="main-button" type="button">仕分け開始 <span>↗</span></button>
-            <small>75秒 / 4ミスで終了</small>
+            <span class="cover-eyebrow">STORM RELIEF / 救援輸送管制</span>
+            <h1>物資を、<em>届けろ。</em></h1>
+            <p>嵐で孤立した街に、救援物資を届ける。</p>
+            <button class="main-button" id="main-button" type="button">救援輸送を開始 <span>↗</span></button>
           </div>
         </div>
 
         <div class="help-panel" id="help-panel" hidden>
           <div class="help-inner">
             <span class="cover-eyebrow">HOW TO PLAY</span>
-            <h2>色を合わせて届けよう。</h2>
-            <p>番号の付いた分岐器をタップすると、線路が直進⇄交差に切り替わります。</p>
+            <h2>街に必要な物資を届けよう。</h2>
+            <p>暴風雨で孤立した街の3つの施設が救援物資を待っています。<strong>薬の箱は病院、食料は避難所、燃料は発電所</strong>へ。箱と配送先に同じ印が付いています。</p><p>番号付きの分岐器をタップすると、線路が直進⇄交差に切り替わります。</p>
             <p>荷物は分岐に入った瞬間に進路が決まります。光る予測線を見ながら、早めに切り替えよう。</p>
-            <p>一度切り替えると、短い間は再操作できません。ノーミス達成後は、少ない切替回数で高得点を狙おう。</p><p class="help-keys">PC操作：数字キー 1 / 2 / 3</p>
+            <p>4回の誤配送で救援中止。最後の救援便まで届け終えれば任務終了です。少ない切替回数で正確に届けるほど高得点。</p><p class="help-keys">PC操作：数字キー 1 / 2 / 3</p>
             <button class="secondary-button" id="help-close" type="button">ゲームに戻る</button>
           </div>
         </div>
       </div>
 
       <div class="field-footer">
-        <div class="field-hint"><span class="hint-glyph">◎</span><span id="hint-text">分岐器をタップ。線路が入れ替わります。</span></div>
+        <div class="field-hint"><span class="hint-glyph">◎</span><span id="hint-text">救援物資を正しい施設へ！</span></div>
         <div class="combo" id="combo">SWITCH <strong id="operations">00</strong><span class="combo-gap"></span> STREAK <strong id="streak">00</strong></div>
       </div>
     </section>
 
     <footer class="page-footer">
-      <span><span class="footer-accent">01—03</span> TAP TO SWITCH</span>
+      <span><span class="footer-accent">3 ROUTES</span> RESCUE DISPATCH</span>
       <span>BEST <strong id="best-score">000000</strong></span>
     </footer>
   </div>
