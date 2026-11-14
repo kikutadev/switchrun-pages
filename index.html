@@ -7,8 +7,8 @@
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <meta name="description" content="タップで進路を切り替える、75秒のリアルタイム仕分けアクション。光る荷物を同じ色の出口へ。" />
   <title>SWITCHRUN — 3つの分岐、75秒の勝負</title>
-  <script type="module" crossorigin src="./assets/index-B_mpGJ2t.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Dd0bWPW7.css">
+  <script type="module" crossorigin src="./assets/index-MGz-BTtH.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BLiOQFyY.css">
 </head>
 <body>
   <div class="app">
@@ -32,7 +32,7 @@
         <strong class="stat-main" id="delivered">00</strong>
       </div>
       <div class="stat stat-time">
-        <span class="stat-label">TIME LEFT <small>残り時間</small></span>
+        <span class="stat-label" id="time-label">TIME LEFT 残り時間</span>
         <div class="time-fig"><strong id="time-left">75</strong><span>SEC</span></div>
       </div>
       <div class="stat stat-health">
@@ -66,8 +66,8 @@
             <span class="cover-eyebrow">HOW TO PLAY</span>
             <h2>色を合わせて届けよう。</h2>
             <p>番号の付いた分岐器をタップすると、線路が直進⇄交差に切り替わります。</p>
-            <p>荷物は分岐を通過した時点で進路が決まります。色付きの予測線を見て、早めに切り替えるのがコツ。</p>
-            <p class="help-keys">PC操作：数字キー 1 / 2 / 3</p>
+            <p>荷物は分岐に入った瞬間に進路が決まります。光る予測線を見ながら、早めに切り替えよう。</p>
+            <p>一度切り替えると、短い間は再操作できません。ノーミス達成後は、少ない切替回数で高得点を狙おう。</p><p class="help-keys">PC操作：数字キー 1 / 2 / 3</p>
             <button class="secondary-button" id="help-close" type="button">ゲームに戻る</button>
           </div>
         </div>
@@ -75,7 +75,7 @@
 
       <div class="field-footer">
         <div class="field-hint"><span class="hint-glyph">◎</span><span id="hint-text">分岐器をタップ。線路が入れ替わります。</span></div>
-        <div class="combo" id="combo">STREAK <strong>00</strong></div>
+        <div class="combo" id="combo">SWITCH <strong id="operations">00</strong><span class="combo-gap"></span> STREAK <strong id="streak">00</strong></div>
       </div>
     </section>
 
